@@ -86,6 +86,7 @@ put '/todos/:id' do
 		return {msg: "update success"}.to_json
 	else
 		return {msg: "upate failure"}.to_json
+	end
 end
 
 # delete a todo
