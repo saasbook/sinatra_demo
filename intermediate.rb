@@ -49,11 +49,13 @@ end
 
 # display all todos
 get '/todos' do 
+	content_type :json
 	Todo.all.to_json
 end
 
 # show a specific todo 
 get '/todos/:id' do 
+	content_type :json
 	todo = Todo.find(params[:id])
 	if todo 
 		return {description: todo.description}.to_json
@@ -67,6 +69,7 @@ end
 # 			otherwise render json with msg set to "error: description can't be blank"
 # hint: use method Todo's class method create
 post '/todos' do
+	content_type :json
 	if params[:description] and params[:description] != ""
 		Todo.create(description: params[:description])
 		return {msg: "create success"}.to_json
@@ -80,6 +83,7 @@ end
 # 				otherwise render json with msg set to "upate failure" 
 # hint: Todo class has instance method update_attribute
 put '/todos/:id' do
+	content_type :json
 	todo = Todo.find(params[:id])
 	if todo and params[:description] and params[:description] != ""
 		todo.update_attribute(:description, params[:description])
@@ -94,6 +98,7 @@ end
 # 				otherwise render json with msg set to "delete failure"
 # hint: Todo class has instance method destroy
 delete '/todos/:id' do 
+	content_type :json
 	todo = Todo.find(params[:id])
 	if todo
 		todo.destroy

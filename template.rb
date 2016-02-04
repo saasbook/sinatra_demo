@@ -50,11 +50,13 @@ end
 
 # display all todos
 get '/todos' do 
+	content_type :json
 	Todo.all.to_json
 end
 
 # show a specific todo 
 get '/todos/:id' do 
+	content_type :json
 	todo = Todo.find(params[:id])
 	if todo 
 		return {description: todo.description}.to_json

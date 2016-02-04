@@ -50,11 +50,13 @@ end
 
 # display all todos
 get '/todos' do 
+	content_type :json
 	Todo.all.to_json
 end
 
 # show a specific todo 
 get '/todos/:id' do 
+	content_type :json
 	todo = Todo.find(params[:id])
 	if todo 
 		return {description: todo.description}.to_json
@@ -67,6 +69,7 @@ end
 # goal: if we receive non-empty description, render json with msg set to "create success"
 # 			otherwise render json with msg set to "error: description can't be blank"
 post '/todos' do
+	content_type :json
 	todo = Todo.new(description: params[:description])
 	if todo.save
 		return {msg: "create success"}.to_json
@@ -79,6 +82,7 @@ end
 # return: if todo with specified id exist and description non-empty, render json with msg set to "update success"
 # 				otherwise render json with msg set to "upate failure" 
 put '/todos/:id' do
+	content_type :json
 	todo = Todo.find(params[:id])
 	if todo.update_attribute(:description, params[:description])
 		return {msg: "update success"}.to_json
@@ -91,6 +95,7 @@ end
 # return: if todo with specified id exist, render json with msg set to "delete success"
 # 				otherwise render json with msg set to "delete failure"
 delete '/todos/:id' do 
+	content_type :json
 	todo = Todo.find(params[:id])
 	if todo
 		todo.destroy
