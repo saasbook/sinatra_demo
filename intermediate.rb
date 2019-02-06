@@ -17,7 +17,7 @@ ActiveRecord::Base.establish_connection(db_options)
 
 # write migration class for creating Todo table in database
 	### how do we write migration in rails?
-class CreateTodos < ActiveRecord::Migration
+class CreateTodos < ActiveRecord::Migration[5.0]
 	def change
 		create_table :todos do |t|
 			t.string :description
